@@ -427,6 +427,7 @@ body {
   color: var(--ink-2);
   max-width: 70ch;
 }
+.timeline__desc + .timeline__desc { margin-top: 12px; }
 .timeline__tags {
   display: flex;
   flex-wrap: wrap;
