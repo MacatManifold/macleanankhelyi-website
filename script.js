@@ -9,6 +9,20 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // ---- Time in current role, counted from its start month (data-since="YYYY-MM")
+  document.querySelectorAll('[data-since]').forEach((el) => {
+    const m = /^(\d{4})-(\d{2})$/.exec(el.getAttribute('data-since'));
+    if (!m) return;
+    const now = new Date();
+    const total = (now.getFullYear() - m[1]) * 12 + (now.getMonth() + 1 - m[2]);
+    if (total < 1) return;
+    const yrs = Math.floor(total / 12), mo = total % 12;
+    const parts = [];
+    if (yrs) parts.push(yrs + (yrs === 1 ? ' yr' : ' yrs'));
+    if (mo) parts.push(mo + ' mo');
+    el.textContent = parts.join(' ');
+  });
+
   // ---- Hero word rotator ("Ankhelyi." / "builds." / "ships." / "listens.")
   const rotator = document.querySelector('.hero__title-rotator');
   if (rotator) {
